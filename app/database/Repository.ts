@@ -1,5 +1,10 @@
+import pg from 'pg'
 class Repository implements IRepository{
-    create (model: IModel){
+    async create (model: IModel){
+        const client = new pg.Client("");
+        await client.connect();
+        await client.query('INSERT INTO $1::text values($2::text)',[tableName, args]);
+        await client.end();
         return model;
     }
     find (id: number){
