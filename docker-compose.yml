@@ -1,0 +1,31 @@
+
+version: '3'
+
+services:
+  postgres-transacao:
+    image: postgres
+    environment:
+      POSTGRES_USER: "admin"
+      POSTGRES_PASSWORD: "pass@123"
+    ports:
+      - "15432:5432"
+    volumes:
+      - ./pg/data:/var/lib/postgresql/data 
+    networks:
+      - postgres-network
+      
+  pgadmin-transacao:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "mateus-junior@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "pass@123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - postgres-transacao
+    networks:
+      - postgres-network
+
+networks: 
+  postgres-network:
+    driver: bridge

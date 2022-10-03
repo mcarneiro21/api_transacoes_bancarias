@@ -1,14 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
 
 @Entity()
 export class User implements IModel {
     @PrimaryGeneratedColumn()
     id: number;
     
-    @Column("datetime")
+    @CreateDateColumn()
     createdAt: Date;
     
-    @Column("datetime")
+    @UpdateDateColumn()
     updatedAt: Date;
     
     @Column("text")
