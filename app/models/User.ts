@@ -1,4 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm"
+import { join } from "path";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm"
+import { Wallet } from "./Wallet";
 
 @Entity()
 export class User implements IModel {
@@ -29,11 +31,12 @@ export class User implements IModel {
     @Column("varchar", {length: 200})
     password: string;
 
-    @Column("int")
-    walletId: number | null;
+    @OneToOne(() => Wallet, (wallet) => wallet.userId )
+    @JoinColumn()
+    wallet: Wallet
 
     constructor(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,
-        isCnpj: boolean, email: string, password: string, walletId: number | null){
+        isCnpj: boolean, email: string, password: string, wallet: Wallet){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
@@ -43,6 +46,6 @@ export class User implements IModel {
         this.isCnpj = isCnpj;
         this.email = email;
         this.password = password;
-        this.walletId = walletId;    
+        this.wallet = wallet;
     }
 }

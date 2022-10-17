@@ -12,16 +12,16 @@ export class Wallet implements IModel {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    @Column()
+    @Column("int")
     saldo: number | null;
 
-    @Column()
+    @Column("int")
     userId: number | null;
 
-    @Column()
+    @Column("int")
     transactions: Collection<Transactions> | null;
 
-    @Column()
+    @Column("enum")
     walletTypeEnum: WalletTypeEnum;
 
     constructor(id: number, createdAt: Date, updatedAt: Date, saldo: number | null, userId: number | null, 

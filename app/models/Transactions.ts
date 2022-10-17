@@ -11,9 +11,30 @@ export class Transactions implements IModel {
     @UpdateDateColumn()
     updatedAt: Date;
 
-    constructor(id: number, createdAt: Date, updatedAt: Date){
+    @Column("int")
+    transactionValue: number | null;
+
+    @Column("int")
+    shippingWalletId: number | null;
+
+    @Column("int")
+    receiptWalletId: number | null;
+
+    @Column("enum")
+    transactionStatus: TransactionTypeEnum
+
+    @Column("boolean")
+    authorized: boolean
+
+    constructor(id: number, createdAt: Date, updatedAt: Date, transactionValue: number | null, 
+        shippingWalletId: number | null, receiptWalletId: number | null, transactionStatus: TransactionTypeEnum, authorized: boolean){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;  
+        this.transactionValue = transactionValue;
+        this.shippingWalletId = shippingWalletId; 
+        this.receiptWalletId = receiptWalletId;
+        this.transactionStatus = transactionStatus;
+        this.authorized = authorized;
     }
 }
