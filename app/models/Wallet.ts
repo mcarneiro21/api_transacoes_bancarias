@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Collection } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Collection, OneToOne } from "typeorm";
 import { Transactions } from "./Transactions";
+import { User } from "./User";
 
 @Entity()
 export class Wallet implements IModel {
@@ -15,8 +16,8 @@ export class Wallet implements IModel {
     @Column("int")
     saldo: number | null;
 
-    @Column("int")
-    userId: number | null;
+    @OneToOne(() => User, (user) => user.wallet)
+    user: User
 
     @Column("int")
     transactions: Collection<Transactions> | null;
@@ -24,13 +25,13 @@ export class Wallet implements IModel {
     @Column("enum")
     walletTypeEnum: WalletTypeEnum;
 
-    constructor(id: number, createdAt: Date, updatedAt: Date, saldo: number | null, userId: number | null, 
+    constructor(id: number, createdAt: Date, updatedAt: Date, saldo: number | null, user: User, 
         transactions: Collection<Transactions> | null, walletTypeEnum: WalletTypeEnum ){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt; 
         this.saldo = saldo; 
-        this.userId = userId;
+        this.user = user;
         this.transactions = transactions;
         this.walletTypeEnum = walletTypeEnum;
     }
