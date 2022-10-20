@@ -1,7 +1,9 @@
 import { AnyMxRecord } from "dns"
 import "reflect-metadata"
 import { DataSource, DataSourceOptions } from "typeorm"
+import { Transactions } from "../models/Transactions";
 import { User } from "../models/User"
+import { Wallet } from "../models/Wallet";
 
 export default class DataSourceConfig {
     source:DataSource;
@@ -14,7 +16,7 @@ export default class DataSourceConfig {
             username,
             password,
             database,
-            entities: [User],
+            entities: [User, Wallet, Transactions],
             synchronize,
             logging,
         })

@@ -1,5 +1,3 @@
-import { type } from "os";
-import { join } from "path";
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm"
 import { Wallet } from "./Wallet";
 
@@ -32,8 +30,8 @@ export class User implements IModel {
     @Column("varchar", {length: 200})
     password: string;
 
-    @OneToOne(() => Wallet, (wallet) => wallet.user )
-    @JoinColumn()
+    @OneToOne(() => Wallet)
+    @JoinColumn({ name: "wallet_id"})
     wallet: Wallet
 
     constructor(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,

@@ -20,14 +20,18 @@ export class Transactions implements IModel {
     @Column("int")
     receiptWalletId: number | null;
 
-    @Column("enum")
-    transactionStatus: TransactionTypeEnum
+    @Column({
+        type: 'enum',
+        enum: TransactionTypeEnum,
+        default: null
+    })
+    transactionStatus: TransactionTypeEnum | null
 
     @Column("boolean")
     authorized: boolean
 
     constructor(id: number, createdAt: Date, updatedAt: Date, transactionValue: number | null, 
-        shippingWalletId: number | null, receiptWalletId: number | null, transactionStatus: TransactionTypeEnum, authorized: boolean){
+        shippingWalletId: number | null, receiptWalletId: number | null, transactionStatus: TransactionTypeEnum | null, authorized: boolean){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;  

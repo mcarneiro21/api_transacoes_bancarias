@@ -16,7 +16,7 @@ export class Wallet implements IModel {
     @Column("int")
     saldo: number | null;
 
-    @OneToOne(() => User, (user) => user.wallet)
+    @OneToOne(() => User)
     user: User
 
     @Column("int")
