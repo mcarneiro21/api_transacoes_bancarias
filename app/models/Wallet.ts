@@ -1,4 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Collection, OneToOne } from "typeorm";
+import { WalletTypeEnum } from "./enums/WalletTypeEnum";
 import { Transactions } from "./Transactions";
 import { User } from "./User";
 
@@ -16,13 +17,13 @@ export class Wallet implements IModel {
     @Column("int")
     saldo: number | null;
 
-    @OneToOne(() => User)
-    user: User
+    @OneToOne(() => User, (user) => user.wallet)
+    user: User;
 
     @Column("int")
     transactions: Collection<Transactions> | null;
 
-    @Column("enum")
+    @Column({type: 'enum',enum: WalletTypeEnum})
     walletTypeEnum: WalletTypeEnum;
 
     constructor(id: number, createdAt: Date, updatedAt: Date, saldo: number | null, user: User, 

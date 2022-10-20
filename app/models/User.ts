@@ -30,9 +30,9 @@ export class User implements IModel {
     @Column("varchar", {length: 200})
     password: string;
 
-    @OneToOne(() => Wallet)
-    @JoinColumn({ name: "wallet_id"})
-    wallet: Wallet
+    @OneToOne(() => Wallet, (wallet) => wallet.user)
+    @JoinColumn()
+    wallet: Wallet;
 
     constructor(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,
         isCnpj: boolean, email: string, password: string, wallet: Wallet){

@@ -1,4 +1,4 @@
-enum WalletTypeEnum {
+export enum WalletTypeEnum {
     COMUM, 
     LOGISTA
 }

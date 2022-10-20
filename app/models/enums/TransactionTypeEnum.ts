@@ -1,4 +1,4 @@
-enum TransactionTypeEnum {
+export enum TransactionTypeEnum {
     PENDING, //pendente
     PROCESSING, //em processamento
     AUTHORIZED, //autorizado
