@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm"
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, OneToOne } from "typeorm"
 import { Wallet } from "./Wallet";
 
 @Entity()
@@ -31,7 +31,6 @@ export class User implements IModel {
     password: string;
 
     @OneToOne(() => Wallet, (wallet) => wallet.user)
-    @JoinColumn()
     wallet: Wallet;
 
     constructor(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,

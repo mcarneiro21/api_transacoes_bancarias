@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Collection, OneToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Collection, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { WalletTypeEnum } from "./enums/WalletTypeEnum";
 import { Transactions } from "./Transactions";
 import { User } from "./User";
@@ -18,22 +18,28 @@ export class Wallet implements IModel {
     saldo: number | null;
 
     @OneToOne(() => User, (user) => user.wallet)
+    @JoinColumn()
     user: User;
 
-    @Column("int")
-    transactions: Collection<Transactions> | null;
+    @OneToMany(() => Transactions, (toTransactions) => toTransactions.toWallet)
+    toTransactions: Collection<Transactions> | null;
+
+    @OneToMany(() => Transactions, (fromTransactions) => fromTransactions.fromWallet)
+    fromTransactions: Collection<Transactions> | null;
 
     @Column({type: 'enum',enum: WalletTypeEnum})
     walletTypeEnum: WalletTypeEnum;
 
     constructor(id: number, createdAt: Date, updatedAt: Date, saldo: number | null, user: User, 
-        transactions: Collection<Transactions> | null, walletTypeEnum: WalletTypeEnum ){
+        toTransactions: Collection<Transactions> | null, fromTransactions: Collection<Transactions> | null, 
+        walletTypeEnum: WalletTypeEnum ){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt; 
         this.saldo = saldo; 
         this.user = user;
-        this.transactions = transactions;
+        this.toTransactions = toTransactions;
+        this.fromTransactions = fromTransactions;
         this.walletTypeEnum = walletTypeEnum;
     }
 }

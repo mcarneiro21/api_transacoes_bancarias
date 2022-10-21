@@ -1,7 +1,8 @@
 export enum TransactionTypeEnum {
-    PENDING, //pendente
+    OPEN, //pendente
     PROCESSING, //em processamento
     AUTHORIZED, //autorizado
     REFUNDED, //devolveu
-    REFUSED //recusou
+    REFUSED, //recusou
+    QUEUE //fila
 }
