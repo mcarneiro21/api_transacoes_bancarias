@@ -31,10 +31,10 @@ export class User implements IModel {
     password: string;
 
     @OneToOne(() => Wallet, (wallet) => wallet.user)
-    wallet: Wallet;
+    wallet: Wallet | null;
 
     constructor(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,
-        isCnpj: boolean, email: string, password: string, wallet: Wallet){
+        isCnpj: boolean, email: string, password: string, wallet: Wallet | null){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;

@@ -15,7 +15,7 @@ const dataSource = new DataSourceConfig(
     process.env.DB_PASSWORD || '',
     process.env.DB_DATABASE || ''
     );
-const appDB = dataSource.getDataSource();
+export const appDB = dataSource.getDataSource();
 
 appDB.initialize()
     .then(() => {

@@ -4,8 +4,9 @@ import { DataSource, DataSourceOptions } from "typeorm"
 import { Transactions } from "../models/Transactions";
 import { User } from "../models/User"
 import { Wallet } from "../models/Wallet";
+import { IDataSourceConfig } from "./interfaces/IDataSourceConfig";
 
-export default class DataSourceConfig {
+export default class DataSourceConfig implements IDataSourceConfig {
     source:DataSource;
 
     constructor(type: any, host: string, port: number, username: string, password: string, database:string, synchronize: boolean = true, logging: boolean = false) {
