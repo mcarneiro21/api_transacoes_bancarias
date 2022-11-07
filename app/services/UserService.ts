@@ -1,11 +1,15 @@
 import { DataSource } from "typeorm";
 import { appDB } from "../../index";
 import { User } from "../models/User"
+import { IDataSourceConfig } from "../database/interfaces/IDataSourceConfig";
+import { injected } from "brandi";
+import { TOKENS } from "../../container";
 
 export class UserService {
    private dataSource : DataSource;
-    constructor() {
-        this.dataSource = new DataSource();
+    constructor(config: IDataSourceConfig) {
+        this.dataSource = config.getDataSource();
+        this.dataSource.initialize();
     }
   
     createUserEntity(){ 
@@ -25,3 +29,4 @@ export class UserService {
     }
         
 }
+injected(UserService, TOKENS.dataSourceConfig);
