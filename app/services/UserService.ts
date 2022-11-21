@@ -29,6 +29,33 @@ export class UserService {
             console.log(error);
         }
     }
-        
+    
+    async readUserEntity(){
+        try {
+            return await this.dataSource.manager.findOneBy(User, {
+                id: 1
+            })   
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async updateUserEntity(){
+        try {
+            await this.dataSource.manager.update(User, 1, {
+            firstName: 'update'
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async deleteUserEntity(){
+        try {
+            await this.dataSource.manager.delete(User, 1);
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 injected(UserService, TOKENS.dataSourceConfig);

@@ -1,4 +1,4 @@
-import express, {Express, Request, Response} from 'express';
+import express, {Express, Request, response, Response} from 'express';
 import "reflect-metadata";
 import * as dotenv from 'dotenv';
 import DataSourceConfig from "./app/database/DataSourceConfig";
@@ -54,6 +54,39 @@ appDB.initialize()
             res.send(err);
         });
     });
+
+    app.get('/selectUser', (req: Request, res: Response) => {
+        tst.readUserEntity()
+        .then((response) => {
+            console.log(response);
+            res.send(response);
+        })
+        .catch((err) => {
+            res.send(err);
+        })
+    });
+
+    app.get('/updateUser', (req: Request, res: Response) => {
+        tst.updateUserEntity()
+        .then((response) => {
+            console.log(response);
+            res.send(response);
+        })
+        .catch((err) => {
+            res.send(err);
+        })
+    });
+
+    app.get('/deleteUser', (req: Request, res: Response) => {
+        tst.deleteUserEntity()
+        .then((response) => {
+            console.log(response);
+            res.send(response);
+        })
+        .catch((err) => {
+            res.send(err);
+        })
+    })
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando na porta ${port}`);
