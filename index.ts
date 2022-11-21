@@ -27,7 +27,7 @@ container.bind(TOKENS.dataSourceConfig).toInstance(DataSourceConfig).inSingleton
 container.bind(TOKENS.userService).toInstance(UserService).inTransientScope();
 
 const tst = container.get(TOKENS.userService);
-tst.createUserEntity();
+
 
 /* const dataSource = new DataSourceConfig(
     process.env.DB_TYPE,
@@ -43,9 +43,17 @@ appDB.initialize()
     .then(() => {
     })
     .catch((error) => console.log(error));
-app.get('/', (req: Request, res: Response) => {
-    res.send('Iniciando o projeto');
-}); */
+ */
+
+    app.get('/createUser', (req: Request, res: Response) => {
+        tst.createUserEntity()
+        .then((response) => {
+            res.send(response);   
+        })
+        .catch((err) => {
+            res.send(err);
+        });
+    });
 
 app.listen(port, ()=>{
     console.log(`Servidor rodando na porta ${port}`);

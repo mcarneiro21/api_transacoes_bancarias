@@ -1,5 +1,4 @@
 import { DataSource } from "typeorm";
-import { appDB } from "../../index";
 import { User } from "../models/User"
 import { IDataSourceConfig } from "../database/interfaces/IDataSourceConfig";
 import { injected } from "brandi";
@@ -9,10 +8,9 @@ export class UserService {
    private dataSource : DataSource;
     constructor(config: IDataSourceConfig) {
         this.dataSource = config.getDataSource();
-        this.dataSource.initialize();
     }
   
-    createUserEntity(){ 
+    async createUserEntity(){ 
         const user = new User(
           0,
           new Date,
@@ -25,7 +23,11 @@ export class UserService {
           'teste',
           null
         );
-        this.dataSource.manager.save(user);
+        try {
+            await this.dataSource.manager.save(user);   
+        } catch (error) {
+            console.log(error);
+        }
     }
         
 }

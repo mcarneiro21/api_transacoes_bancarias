@@ -24,6 +24,14 @@ export default class DataSourceConfig implements IDataSourceConfig {
             synchronize,
             logging,
         })
+        this.source.initialize()
+        .then(() => {
+            console.log("Data Source has been initialized!");
+        })
+        .catch((err) => {
+            console.error("Error during Data Source initialization", err);
+            throw new Error('Fatal Error not possible to connect to database'); 
+        })
     }
 
     getDataSource() : DataSource {
