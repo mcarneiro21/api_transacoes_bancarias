@@ -45,8 +45,32 @@ appDB.initialize()
     .catch((error) => console.log(error));
  */
 
-    app.get('/createUser', (req: Request, res: Response) => {
-        tst.createUserEntity()
+    app.post('/createUser', (req: Request, res: Response) => {
+        
+        const {
+          id,
+          createdAt,
+          updatedAt,
+          firstname,
+          lastName,
+          cpfCnpj,
+          isCnpj,
+          email,
+          password,
+          wallet
+        } = req.body
+        
+        tst.createUserEntity(
+            id,
+            createdAt,
+            updatedAt,
+            firstname,
+            lastName,
+            cpfCnpj,
+            isCnpj,
+            email,
+            password,
+            wallet)
         .then((response) => {
             res.send(response);   
         })

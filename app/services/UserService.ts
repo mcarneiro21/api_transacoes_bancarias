@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
 import { User } from "../models/User"
+import { Wallet } from "../models/Wallet";
 import { IDataSourceConfig } from "../database/interfaces/IDataSourceConfig";
 import { injected } from "brandi";
 import { TOKENS } from "../../container";
@@ -10,18 +11,19 @@ export class UserService {
         this.dataSource = config.getDataSource();
     }
   
-    async createUserEntity(){ 
+    async createUserEntity(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,
+        isCnpj: boolean, email: string, password: string, wallet: Wallet | null){ 
         const user = new User(
-          0,
-          new Date,
-          new Date,
-          'Mateus',
-          'Junior',
-          '12345678910111',
-          true,
-          'mateus@teste.com',
-          'teste',
-          null
+          id,
+          createdAt,
+          updatedAt,
+          firstname,
+          lastName,
+          cpfCnpj,
+          isCnpj,
+          email,
+          password,
+          wallet
         );
         try {
             await this.dataSource.manager.save(user);   

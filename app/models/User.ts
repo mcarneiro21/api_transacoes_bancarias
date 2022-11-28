@@ -33,12 +33,12 @@ export class User implements IModel {
     @OneToOne(() => Wallet, (wallet) => wallet.user)
     wallet: Wallet | null;
 
-    constructor(id: number, createdAt: Date, updatedAt: Date, firstname: string, lastName: string, cpfCnpj: string,
+    constructor(id: number, createdAt: Date, updatedAt: Date, firstName: string, lastName: string, cpfCnpj: string,
         isCnpj: boolean, email: string, password: string, wallet: Wallet | null){
         this.id = id;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.firstName = firstname;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.cpfCnpj = cpfCnpj;
         this.isCnpj = isCnpj;
